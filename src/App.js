@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import GenerateMealPlan from './components/GenerateMealPlan';
+import Header from './components/Header';
+import Homepage from './components/Homepage';
+import ImageVerification from './components/ImageVerification';
 
-function App() {
+import './App.css'
+import StickyFooter from './components/StickyFooter';
+import { useMyContext } from './context';
+
+const App = () => {
+
+  const { state, dispatch } = useMyContext();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div className="app">
+      <div className="header">
+        <Header />
+      </div>
+      <div className="main">
+        <div className="routes">
+          <Routes>
+            <Route exact path='/' element={<Homepage />} />
+            <Route exact path='/imagesearch' element={<ImageVerification />} />
+            <Route exact path='/mealplan' element={<GenerateMealPlan />} />
+            {/* <Route exact path='/image' element={<ImageVerification />} /> */}
+          </Routes>
+        </div>
+      </div>
+      <StickyFooter />
+    </div >
   );
 }
 
